@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-EstaparGarage.Api-ca5c4902-d42b-4769-9cb8-dba42588557e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.25" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.16.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Data\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="V1\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EstaparGarage.Bussinees\EstaparGarage.Bussinees.csproj" />
+    <ProjectReference Include="..\EstaparGarage.Data\EstaparGarage.Data.csproj" />
+  </ItemGroup>
+
+</Project>
