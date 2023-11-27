@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Pipes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EstaparGarage.Bussinees.Models
+﻿namespace EstaparGarage.Bussinees.Models
 {
     public class Garagem : Entity
     {
@@ -18,5 +11,4 @@ namespace EstaparGarage.Bussinees.Models
         public Passagem passagem { get; set; }
     }
 
-   
 }
