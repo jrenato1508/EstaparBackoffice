@@ -3,10 +3,12 @@ using EstaparBackoffice.Controllers;
 using EstaparBackoffice.DTO;
 using EstaparGarage.business.Interfaces;
 using EstaparGarage.Bussinees.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstaparBackoffice.V1.Controllers
 {
+    [Authorize]
     [Route("api/Fechamento")]
     public class FechamentoController : MainController
     {

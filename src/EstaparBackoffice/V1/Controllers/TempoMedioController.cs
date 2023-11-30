@@ -4,10 +4,13 @@ using EstaparBackoffice.DTO;
 using EstaparGarage.business.Interfaces;
 using EstaparGarage.Bussinees.Interfaces;
 using EstaparGarage.Data.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstaparBackoffice.V1.Controllers
 {
+    [Authorize]
+    [Route("api/Tempo-medio-veiculo")]
     public class TempoMedioController : MainController
     {
         public readonly IPassagemRepository _passagemrepository;
