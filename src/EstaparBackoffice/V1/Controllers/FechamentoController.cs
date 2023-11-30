@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using EstaparBackoffice.Controllers;
 using EstaparBackoffice.DTO;
+using EstaparBackoffice.Extensions.ClaimsAuthorize;
 using EstaparGarage.business.Interfaces;
 using EstaparGarage.Bussinees.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace EstaparBackoffice.V1.Controllers
 {
     [Authorize]
-    [Route("api/Fechamento")]
+    [ClaimsAuthorize("stapar", "admin")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/Fechamento")]
     public class FechamentoController : MainController
     {
         private readonly IGaragemRepository _garagemRepository;
@@ -26,6 +30,7 @@ namespace EstaparBackoffice.V1.Controllers
             _mapper = mapper;
         }
 
+        
         [HttpGet("obter-por-placa{placa}")]
         public async Task<ActionResult<PassagemViewModel>> Fechamento(string placa)
         {

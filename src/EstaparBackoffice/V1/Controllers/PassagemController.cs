@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using EstaparBackoffice.Controllers;
 using EstaparBackoffice.DTO;
+using EstaparBackoffice.Extensions.ClaimsAuthorize;
 using EstaparGarage.business.Interfaces;
 using EstaparGarage.Bussinees.Interfaces;
 using EstaparGarage.Bussinees.Models;
@@ -10,7 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace EstaparBackoffice.V1.Controllers
 {
     [Authorize]
-    [Route("api/Passagem")]
+    [ClaimsAuthorize("stapar", "admin")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/Passagem")]
     public class PassagemController : MainController
     {
         private readonly IMapper _mapper;
@@ -54,7 +58,7 @@ namespace EstaparBackoffice.V1.Controllers
         public async Task<ActionResult<PassagemViewModel>> Adicionar(PassagemViewModel passagemViewModel)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
-            
+
             await _passagemService.Adicionar(_mapper.Map<Passagem>(passagemViewModel));
 
             return CustomResponse(passagemViewModel);

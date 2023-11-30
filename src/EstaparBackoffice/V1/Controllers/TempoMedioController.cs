@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using EstaparBackoffice.Controllers;
 using EstaparBackoffice.DTO;
+using EstaparBackoffice.Extensions.ClaimsAuthorize;
 using EstaparGarage.business.Interfaces;
 using EstaparGarage.Bussinees.Interfaces;
 using EstaparGarage.Data.Repository;
@@ -10,7 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace EstaparBackoffice.V1.Controllers
 {
     [Authorize]
-    [Route("api/Tempo-medio-veiculo")]
+    [ClaimsAuthorize("stapar", "admin")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/Tempo-medio-veiculo")]
     public class TempoMedioController : MainController
     {
         public readonly IPassagemRepository _passagemrepository;

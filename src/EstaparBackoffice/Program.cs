@@ -1,3 +1,4 @@
+using Asp.Versioning.ApiExplorer;
 using EstaparBackoffice.Configuration;
 using EstaparGarage.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ builder.Services.AddSwaggerConfig();
 builder.Services.ResolveDependencies();
 
 var app = builder.Build();
+var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
 #region Comentado
 // Configure the HTTP request pipeline.
@@ -40,6 +42,6 @@ var app = builder.Build();
 
 app.UseApiConfig(app.Environment);
 app.MapControllers();
-app.UseSwaggerConfig();
+app.UseSwaggerConfig(apiVersionDescriptionProvider);
 
 app.Run();

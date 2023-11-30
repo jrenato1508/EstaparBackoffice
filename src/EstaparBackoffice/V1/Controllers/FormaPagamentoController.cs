@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using EstaparBackoffice.Controllers;
 using EstaparBackoffice.DTO;
+using EstaparBackoffice.Extensions.ClaimsAuthorize;
 using EstaparGarage.business.Interfaces;
 using EstaparGarage.Bussinees.Interfaces;
 using EstaparGarage.Data.Repository;
@@ -10,7 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace EstaparBackoffice.V1.Controllers
 {
     [Authorize]
-    [Route("api/FormaPagamento")]
+    [ClaimsAuthorize("stapar", "admin")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/FormaPagamento")]
     public class FormaPagamentoController : MainController
     {
         private readonly IMapper _mapper;
@@ -24,7 +28,7 @@ namespace EstaparBackoffice.V1.Controllers
             _FormaPagamentoRepository= repository;
         }
 
-        [HttpGet]
+        [HttpGet("Obter-forma-pagamento")]
         public async Task<IEnumerable<FormasPagamentoViewModel>> ObterTodos()
         {
 
@@ -32,7 +36,7 @@ namespace EstaparBackoffice.V1.Controllers
 
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("Obter-forma-pagamento-por {id:guid}")]
         public async Task<ActionResult<FormasPagamentoViewModel>> ObterPorId(Guid id)
         {
             var formaDePagamento = await ObterFormaPagamentoPorId(id);

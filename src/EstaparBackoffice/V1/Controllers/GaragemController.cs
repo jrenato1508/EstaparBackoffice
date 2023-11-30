@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using EstaparBackoffice.Controllers;
 using EstaparBackoffice.DTO;
+using EstaparBackoffice.Extensions.ClaimsAuthorize;
 using EstaparGarage.business.Interfaces;
 using EstaparGarage.Bussinees.Interfaces;
 using EstaparGarage.Bussinees.Models;
@@ -10,7 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace EstaparBackoffice.V1.Controllers
 {
     [Authorize]
-    [Route("api/Garagem")]
+    [ClaimsAuthorize("stapar", "admin")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/Garagem")]
     public class GaragemController : MainController
     {
 
@@ -36,7 +40,7 @@ namespace EstaparBackoffice.V1.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("Obter-garage-por{id}")]
         public async Task<ActionResult<GaragemViewModel>> ObterPorId(Guid id)
         {
             var garagem = await ObterGaragem(id);
@@ -50,7 +54,7 @@ namespace EstaparBackoffice.V1.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Nova-garagem")]
         public async Task<ActionResult<GaragemViewModel>> Adicionar(GaragemViewModel garagemViewModel)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
@@ -61,7 +65,7 @@ namespace EstaparBackoffice.V1.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut("Atualizar-garagem {id}")]
         public async Task<IActionResult> Atualizar(Guid id, GaragemViewModel garagemViewModel)
         {
             if (id != garagemViewModel.Id)
@@ -88,7 +92,7 @@ namespace EstaparBackoffice.V1.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Excluir- garagem{id}")]
         public async Task<IActionResult> Excluir(Guid id)
         {
             var garagem = await ObterGaragem(id);

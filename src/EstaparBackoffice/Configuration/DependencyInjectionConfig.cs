@@ -4,6 +4,8 @@ using EstaparGarage.business.Services;
 using EstaparGarage.Bussinees.Interfaces;
 using EstaparGarage.Data.Context;
 using EstaparGarage.Data.Repository;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace EstaparBackoffice.Configuration
 {
@@ -20,6 +22,7 @@ namespace EstaparBackoffice.Configuration
             
 
             services.AddScoped<INotificador, Notificador>();
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
             return services;
         }

@@ -14,11 +14,12 @@ namespace EstaparGarage.Data.Repository
     {
         public PassagemRepository(EstaparDbcontext db) : base(db) { }
 
+        DateTime data = Convert.ToDateTime("01/01/0001 00:00:00");
+
         public async Task<List<Passagem>> ObterPassagemPeriodo(DateTime dtentrada, DateTime dtsaida)
         {
             return await _context.Passagens.AsNoTracking().
                 Where(p => p.DataHoraEntrada >= dtentrada && p.DataHoraSaida <= dtsaida).ToListAsync();
-                                         
         }
 
         public async Task<Passagem> ObterPassagemPorCodigoGaragem(string codigo)
@@ -38,13 +39,13 @@ namespace EstaparGarage.Data.Repository
 
         public async Task<List<Passagem>> ObterVeiculosGaragem()
         {
-            return await _context.Passagens.AsNoTracking().Where(p=>p.DataHoraSaida == null).ToListAsync();
-                
+            
+            return await _context.Passagens.AsNoTracking().Where(p=>p.DataHoraSaida == data).ToListAsync();
         }
 
         public async Task<List<Passagem>> ObterVeicuCheckOutlosGaragem()
         {
-            return await _context.Passagens.AsNoTracking().Where(p => p.DataHoraSaida != null).ToListAsync();
+            return await _context.Passagens.AsNoTracking().Where(p => p.DataHoraSaida != data).ToListAsync();
 
         }
 

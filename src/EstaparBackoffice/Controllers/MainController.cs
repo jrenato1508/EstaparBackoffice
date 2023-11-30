@@ -10,15 +10,16 @@ namespace EstaparBackoffice.Controllers
     public abstract class MainController : ControllerBase
     {
         private readonly INotificador _notificador;
+
         public MainController(INotificador notificador)
         {
             _notificador = notificador;
         }
 
-
-        protected bool OperacaoValida()
+        protected ActionResult CustomResponse(ModelStateDictionary modelState)
         {
-            return !_notificador.TemNotificacao();
+            if (!modelState.IsValid) NotificarErroModelInvalida(modelState);
+            return CustomResponse();
         }
 
         protected ActionResult CustomResponse(object result = null)
@@ -39,10 +40,9 @@ namespace EstaparBackoffice.Controllers
             });
         }
 
-        protected ActionResult CustomResponse(ModelStateDictionary modelState)
+        protected bool OperacaoValida()
         {
-            if (!modelState.IsValid) NotificarErroModelInvalida(modelState);
-            return CustomResponse();
+            return !_notificador.TemNotificacao();
         }
 
         protected void NotificarErroModelInvalida(ModelStateDictionary modelState)
