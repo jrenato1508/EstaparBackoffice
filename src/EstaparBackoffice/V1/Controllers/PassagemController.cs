@@ -31,7 +31,7 @@ namespace EstaparBackoffice.V1.Controllers
             _passagemService= passagem;
         }
 
-        [HttpGet]
+        [HttpGet("Obter-Todos")]
         public async Task<IEnumerable<PassagemViewModel>> ObterTodos()
         {
 
@@ -39,7 +39,7 @@ namespace EstaparBackoffice.V1.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("Obter-por-{id}")]
         public async Task<ActionResult<PassagemViewModel>> ObterPorId(Guid id)
         {
             var Passagem = await ObterPassagemId(id);
@@ -54,7 +54,7 @@ namespace EstaparBackoffice.V1.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Nova-passagem")]
         public async Task<ActionResult<PassagemViewModel>> Adicionar(PassagemViewModel passagemViewModel)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);

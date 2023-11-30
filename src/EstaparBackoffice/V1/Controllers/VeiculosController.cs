@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EstaparBackoffice.V1.Controllers
 {
-    //[Authorize]
-    //[ClaimsAuthorize("stapar", "admin")]
+    [Authorize]
+    [ClaimsAuthorize("stapar", "admin")]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/Veiculos")]
     public class VeiculosController : MainController
