@@ -8,6 +8,7 @@ using EstaparGarage.Bussinees.Interfaces;
 using EstaparGarage.Bussinees.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace EstaparBackoffice.V1.Controllers
 {
@@ -21,22 +22,42 @@ namespace EstaparBackoffice.V1.Controllers
         private readonly IGaragemRepository _garagemRepository;
         private readonly IGaragemService _garagemService;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _memoryCache;
+        private const string Garagens_Key = "Garanges";
 
         public GaragemController(IGaragemRepository garagem,
-                                 IGaragemService garagemService, 
+                                 IGaragemService garagemService,
                                  IMapper mapper,
+                                 IMemoryCache memoryCache,
                                  INotificador notificador) : base(notificador)
         {
             _garagemRepository = garagem;
             _garagemService = garagemService;
             _mapper = mapper;
+            _memoryCache = memoryCache;
         }
 
         [HttpGet]
         public async Task<IEnumerable<GaragemViewModel>> ObterTodos()
         {
+            if(_memoryCache.TryGetValue(Garagens_Key, out IEnumerable<GaragemViewModel> garagens))
+            {
+                return garagens;
+            }
+            
+            garagens = _mapper.Map<IEnumerable<GaragemViewModel>>(await _garagemRepository.ObterTodos());
 
-            return _mapper.Map<IEnumerable<GaragemViewModel>>(await _garagemRepository.ObterTodos());
+            var memoryCache = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(3600),
+                SlidingExpiration = TimeSpan.FromSeconds(1200)
+                
+            };
+
+            _memoryCache.Set(Garagens_Key, garagens, memoryCache);
+
+            return garagens;
+            //return _mapper.Map<IEnumerable<GaragemViewModel>>(await _garagemRepository.ObterTodos());
 
         }
 

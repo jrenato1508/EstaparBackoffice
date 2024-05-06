@@ -81,7 +81,7 @@ namespace EstaparBackoffice.Configuration
                 Title = "API Desenvolvida por José Renato",
                 Version = description.ApiVersion.ToString(),
                 Description = "Esta é um teste de acesso aos serviços da STAPAR",
-                Contact = new OpenApiContact() { Name = "José Renato", Email = "joserenato@gmail.com" },
+                Contact = new OpenApiContact() { Name = "José Renato", Email = "jrenato1508@gmail.com" },
                 License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
             };
 

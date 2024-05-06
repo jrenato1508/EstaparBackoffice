@@ -52,7 +52,7 @@ __APIs__
 
 O valor (`PrecoTotal`) de todas as passagens devem ser calculados levando em consideração: 1) Tempo de estadia; 2) Preço da primeira hora + preço das demais horas de cada Garagem.
 
-Forma de Pagamento como `Mensalista` deve ter o falor zerado (0)
+Forma de Pagamento como `Mensalista` deve ter o valor zerado (0)
 
 
 - __Lista de Carros__
