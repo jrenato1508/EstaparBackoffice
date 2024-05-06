@@ -64,14 +64,11 @@ Forma de Pagamento como `Mensalista` deve ter o falor zerado (0)
 - __Tempo Médio__
     - Dado um período, 1) Calcular tempo médio de estadia de mensalistas; 2) Calcular o tempo médio de estaria de clientes não mensalistas
 
-* Bônus
-
-- __Autenticação__ Implementar autenticação garantindo que apenas usuários logados consigam acessar as APIs.
-- __Autorização__ Garantir que apenas usuários associados a uma garagem tenha acesso aos dados daquela garagem específica.
-- __Cache__ Verificar se a consulta já foi feita anteriormente e obter o resultado a partir do `Blob Storage` ao invés do `SQL Server`
-- __Testes__ Testes unitários
-
-
+- __Bônus__
+	- Autenticação: Implementar autenticação garantindo que apenas usuários logados consigam acessar as APIs.
+	- Autorização Garantir que apenas usuários associados a uma garagem tenha acesso aos dados daquela garagem específica.utorização Garantir que apenas usuários associados a uma garagem tenha acesso aos dados daquela garagem específica.
+	- Cache: Verificar se a consulta já foi feita anteriormente e obter o resultado a partir do `Blob Storage` ao invés do `SQL Server`
+	
 ## ⚙️ Tecnologias
 * C# 
 * .NET 6
@@ -98,4 +95,4 @@ Forma de Pagamento como `Mensalista` deve ter o falor zerado (0)
 ## 📥 Contatos
 * 👤Linkedin: https://www.linkedin.com/in/jose-renatonascimento/ 
 * ✉️Email: jrenato1508@gmail.com 
-* 📱WhatsApp:(11)979547473
+* 📱WhatsApp: (11)979547473
